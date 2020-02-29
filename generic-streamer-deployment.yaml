@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hl7-validation-streamer
+  labels:
+    app: hl7-validation-streamer
+spec:
+  selector:
+    matchLabels:
+      app: hl7-validation-streamer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hl7-validation-streamer
+    spec:
+      containers:
+        - name: hl7-validation-streamer
+          image: 471108701394.dkr.ecr.us-east-1.amazonaws.com/arln/hl7-validation-streamer:latest
+          ports:
+            - containerPort: 10005
+          envFrom:
+            - configMapRef:
+                name: hl7-validation-streamer-config-map
+      imagePullSecrets:
+        - name: eip-registry-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hl7-validation-streamer
+  name: hl7-validation-streamer
+  namespace: default
+spec:
+  type: LoadBalancer  # use LoadBalancer as type here
+  ports:
+    - port: 10005
+  selector:
+    app: hl7-validation-streamer

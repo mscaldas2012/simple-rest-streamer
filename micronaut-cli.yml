@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: simple.rest.streamer
+---
+testFramework: spek
+sourceLanguage: kotlin
