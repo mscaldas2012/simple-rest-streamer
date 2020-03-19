@@ -35,6 +35,18 @@ services:
    networks:
      - sdh_nw
 
+ rest_streamer:
+  #image: 471108701394.dkr.ecr.us-east-1.amazonaws.com/arln/translation-rest-streamer:db862b91
+  image: simple_rest-streamer
+  container_name: simple_rest_streamer
+  environment:
+    - KAFKA_BOOTSTRAP_SERVERS=http://kafka:9092
+    - app_serviceurl=http://a6a033b64485d11ea90ef02a63d31329-125258837.us-east-1.elb.amazonaws.com/translation-service/translate/daart-gc
+  depends_on:
+    - kafka
+  networks:
+    - sdh_nw
+
 networks:
  sdh_nw:
    driver: bridge
