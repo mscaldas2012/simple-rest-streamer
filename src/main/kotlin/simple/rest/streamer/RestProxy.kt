@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class RestProxy(@Inject val appConfig: AppConfig) {
 
-    fun callRestService(payload: String): String {
+    inline fun callRestService(payload: String): String {
         var newValue = payload
 //        val json = jacksonObjectMapper()
         runBlocking {

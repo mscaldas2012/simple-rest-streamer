@@ -1,15 +1,15 @@
 #List topic
-docker-compose exec kafka kafka-console-consumer --topic topic_out --bootstrap-server localhost:9092 --from-beginning
+docker-compose exec kafka kafka-console-consumer --topic topic_in --bootstrap-server localhost:9092 --from-beginning
 
 #Delete topic
 docker-compose exec kafka kafka-topics —-zookeeper localhost:2181 —-list —-topic validationReport
 
 # Send message to topic via TTY
-docker-compose exec kafka kafka-console-producer  --broker-list kafka:9092 --topic topic_in --property "parse.key=true" --property "key.separator=^"
+docker-compose exec kafka kafka-console-producer  --broker-list kafka:9092 --topic topic_in_json --property "parse.key=true" --property "key.separator=^"
 
 
 # Send messages bigger than 4095 charactes: (via file)
-docker-compose exec -T kafka kafka-console-producer --broker-list localhost:9092 --topic hl7_source9 --property "parse.key=true" --property "key.separator=^" < testMessage.txt
+docker-compose exec -T kafka kafka-console-producer --broker-list localhost:9092 --topic topic_in_json --property "parse.key=true" --property "key.separator=^" < testMessage.txt
 
 #test message:
 1^{"recorduuid": "1234-ABCD","s3objectkey":"s3key","uploaddatetime":"String","uploadid":"test123","organization":"org1","program":"DHQP","username":"mcq1@cdc.gov","filestatus":"Accepted","content":"TVNIfF5+XCYjfENMSU1TLk5ZLlN0YWdeMi4xNi44NDAuMS4xMTQyMjIuNC4zLjMuMi4xNy4yXklTT3xOWS5XYWRzd29ydGguQmlnZ3NeMi4xNi44NDAuMS4xMTQyMjIuNC4xLjEzMTkxM15JU098QUlNUy5JTlRFR1JBVElPTi5TVEdeMi4xNi44NDAuMS4xMTQyMjIuNC4zLjE1LjJeSVNPfFZpcmFsRXhESFFQRGlhZ01pY3JvXjIuMTYuODQwLjEuMTE0MjIyLjQuMS4yMTMyODVeSVNPfDIwMTkwNjA2MTI1MTE3LjIxMDQtMDQwMHx8T1JVXlIwMV5PUlVfUjAxfEFSTE4gVUFUIEVMUiBESFFQIDAwMSBWYWxpZHxUfDIuNS4xfHx8fHx8fHx8UEhMYWJSZXBvcnQtTm9BY2teRUxSMjUxUjFfUmN2cl9Qcm9mXjIuMTYuODQwLjEuMTEzODgzLjkuMTFeSVNPClNGVHxPcmlvbiBIZWFsdGheRF5eXl5PcmlvbiBIZWFsdGgmMi4xNi44NDAuMS4xMTM4ODMuMy44OSZJU09eWFheXl4xfDQuMS4wLjY0MTY4fE9yaW9uIFJoYXBzb2R5fDQuMS4wLjY0MTY4ClBJRHwxfHxQVFswMDAwMDU4NTkxXV5eXkNMSU1TLk5ZLlN0YWcmMi4xNi44NDAuMS4xMTQyMjIuNC4zLjMuMi4xNy4yJklTT15NUnx8fl5eXl5eXlN8fDE5NTkwMjAzfE18fDIxMzEtMV5PdGhlciBSYWNlXkhMNzAwMDV8Xl5eVlQKTlRFfDF8UHxUaGlzIGlzIGEgc2FtcGxlIE5URSBzZWdtZW50fndpdGggbXVsdGlwbGUgY29tbWVudHN+ZW1iZWRkZWQgaW4gaXQKT1JDfFJFfHxGTzEwLjBeXjIuMTYuODQwLjEuMTEzODgzLjMuNzIuNS4yMF5JU098fHx8fHx8fHx8fHx8fHx8fHxVbml2ZXJzaXR5IEhvc3BpdGFsfF5eXl5eXl5eNDIwNDN8Xl5eXl5eNzc3MTIzNApPQlJ8MXx8Rk8xMC4wXl4yLjE2Ljg0MC4xLjExMzg4My4zLjcyLjUuMjBeSVNPfFBMVDY0Ml5eUExUfHx8MjAxNDA2MTd8fHx8fHx8fHx8fHx8fHwyMDE0MDYxODAwMDAtMDUwMHx8fEYKT0JYfDF8RFR8UExUNjQyXkRhdGUgcmVwb3J0ZWQgdG8gc3VibWl0dGVyXlBMVHx8MjAxNDA2fHx8fHx8Rnx8fHx8fHx8MjAxNDA2MTgwMDAwLTA1MDB8fHx8UEhMSVAtVGVzdC1MYWJ8Xl5eUEEKU1BNfDF8XlNJRDEwLjAmJjIuMTYuODQwLjEuMTEzODgzLjMuNzIuNS4yMCZJU098fDExOTI5NzAwMF5CbG9vZCBTcGVjaW1lbl5TQ1R8fHx8fHx8fHx8fHx8MjAxNDA2MTd8MjAxNDA2MTgxMDAwMzg="}

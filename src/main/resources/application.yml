@@ -41,6 +41,6 @@ app:
   id: ${kafka.application.id}
   incomingtopic: topic_in_json #${APP_INCOMING_TOPIC}
   outgoingtopic: topic_out_json #${APP_OUTGOING_TOPIC}
-  serviceurl: http://localhost:6000/hello/xform #${SERVICE_URL}
+  serviceurl: http://localhost:10005/translate/eip-to-legacy #${SERVICE_URL}
 
 
